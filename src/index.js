@@ -58,7 +58,8 @@ export default function createScrollingComponent(WrappedComponent) {
       onScrollChange: PropTypes.func,
       verticalStrength: PropTypes.func,
       horizontalStrength: PropTypes.func,
-      strengthMultiplier: PropTypes.number
+      strengthMultiplier: PropTypes.number,
+      ref: PropTypes.func
     };
 
     static defaultProps = {
@@ -231,6 +232,9 @@ export default function createScrollingComponent(WrappedComponent) {
       return (
         <WrappedComponent
           ref={ref => {
+            if (this.props.ref) {
+              this.props.ref(ref);
+            }
             this.wrappedInstance = ref;
           }}
           {...props}
